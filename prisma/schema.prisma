@@ -13,6 +13,7 @@ model AdminUser {
   email String @unique
   first_name String @db.Text
   last_name String @db.Text
+  password String @db.Text
   access_role Roles @default(ADMIN)
   last_active DateTime?
   account_status AccountStatus @default(ACTIVE)
@@ -25,6 +26,7 @@ model AdminUser {
 model ActivityLogs {
   id String @id @default(uuid())
   timestamp DateTime @default(now())
+  log_type LogType
   user AdminUser @relation(fields: [admin_id], references: [id])
   admin_id String
 }
@@ -37,4 +39,11 @@ enum Roles {
 enum AccountStatus {
   ACTIVE
   DISABLED
+}
+
+enum LogType {
+  ERROR
+  ALERT
+  INFO
+  WARNING
 }
