@@ -5,11 +5,14 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 import express, { Request, Response, NextFunction } from "express";
+import authRouter from "./routers/auth/auth.router";
 
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json);
+
+app.use(authRouter);
 
 const PORT = process.env.PORT! || 3000;
 
